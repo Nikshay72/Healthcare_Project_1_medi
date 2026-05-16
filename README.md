@@ -1,11 +1,10 @@
-# 🚑 EHVRM-System — Emergency Hospital Vehicle Routing & Management
+#  EHVRM-System — Emergency Hospital Vehicle Routing & Management
 
 A full-stack emergency routing system for Jodhpur hospitals.
-Built for hackathon — converts the single Python prototype into a proper
 React frontend + Flask backend + Firebase database.
 
 ---
-## 📁 Project Structure
+##  Project Structure
 ```
 EHVRM-System/
 ├── frontend/                    ← React + Vite app
@@ -54,7 +53,7 @@ EHVRM-System/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1 — Backend (Flask)
 
@@ -79,7 +78,7 @@ so you don't need to change any URLs.
 
 ---
 
-## 🔑 APIs Needed
+##  APIs Needed
 
 ### 1. Firebase (Required for persistent storage)
 
@@ -112,7 +111,7 @@ so you don't need to change any URLs.
 
 ---
 
-## 🌐 API Endpoints
+##  API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
