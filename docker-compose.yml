@@ -1,0 +1,53 @@
+version: "3.9"
+
+# ────────────────────────────────────────────────────────────────────────────
+# EHVRM-System — Docker Compose
+# Runs the entire stack with a single command:
+#
+#   docker-compose up --build
+#
+# Frontend → http://localhost:5173
+# Backend  → http://localhost:5000
+#
+# Prerequisites:
+#   - Docker + Docker Compose installed
+#   - backend/.env file filled in (copy from .env.example)
+#   - frontend/.env file filled in (copy from .env.example)
+# ────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── FLASK BACKEND ──────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ehvrm-backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    volumes:
+      # Mount Firebase service account key (if using Firebase Admin SDK)
+      - ./database/firebase:/app/database/firebase:ro
+      - ./backend:/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ── REACT FRONTEND ─────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ehvrm-frontend
+    ports:
+      - "5173:5173"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - backend
+    restart: unless-stopped
